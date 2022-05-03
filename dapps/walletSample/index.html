@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web3 Website</title>
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <script>
+      console.log('Web3:', Web3);
+      const GanacheRpcServer = 'http://127.0.0.1:8545';
+      const web3 = new Web3(new Web3.providers.HttpProvider(GanacheRpcServer));
+      web3.eth.getAccounts().then(accounts => {
+        console.log('accounts:', accounts)
+        web3.eth.getBalance(accounts[0]).then(data => console.log('ether:', web3.utils.fromWei(data)))
+        web3.eth.sendTransaction({
+          from: accounts[0],
+          to: accounts[1],
+          value: web3.utils.toWei('1', 'ether')
+        }).then(result => {
+          console.log('transaction result:', result);
+        });
+      })
+    </script>
+  </body>
+</html>
