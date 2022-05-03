@@ -30,6 +30,10 @@ contract SharedWallet is Allowance {
     event ReceivedMoney(address indexed _who, uint _amount);
     event WithdrawnMoney(address indexed _from, address indexed _to, uint _amount);
 
+    function renounceOwnership() public view override onlyOwner {
+        revert("Can't renounce ownership");
+    }
+
     function withdrawMoney(address payable _to, uint _amount) public ownerOrAllance(_amount) {
         require(_amount <= address(this).balance, "There are not enough funds in this smart contract");
         if (owner() != msg.sender) {
