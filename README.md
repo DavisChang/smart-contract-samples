@@ -5,7 +5,10 @@
 Get Ganache UI - https://trufflesuite.com/ganache/
 
 ```
-$ npm install ganache --global
+$ npm install -g ganache
+
+// Truffle v5.5.12 - a development framework for Ethereum
+$ npm install -g truffle
 ```
 
 ## Development
@@ -22,3 +25,24 @@ $ npm install ganache --global
     - Persistent
     - Real-Blockchain
     - Costs Money
+
+## Truffle
+
+A development framework for Ethereum. [Link](https://trufflesuite.com/boxes/react/)
+
+```
+$ truffle unbox react 
+
+```
+
+Compile:              truffle compile
+
+Migrate:              truffle migrate
+
+Test contracts:       truffle test
+
+Test dapp:            cd client && npm test
+
+Run dev server:       cd client && npm run start
+
+Build for production: cd client && npm run build
