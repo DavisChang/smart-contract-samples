@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0
-
 pragma solidity >=0.7.0 <0.9.0;
+
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/07b1b472c0ac3e50963c8d52cd2dac6e7e05260c/contracts/access/Ownable.sol";
+
 contract Item {
     uint public priceInWei;
     uint public index;
@@ -26,7 +28,7 @@ contract Item {
     }
 }
 
-contract SupplyChain {
+contract SupplyChain is Ownable {
     enum State { Created, Paid, Delivered }
 
     struct S_Item {
@@ -41,7 +43,7 @@ contract SupplyChain {
 
     event SupplyChainStep(uint _itemIndex, uint _step, address _itemAddress);
 
-    function createItem(string memory _identifier, uint _itemPrice) public {
+    function createItem(string memory _identifier, uint _itemPrice) public onlyOwner {
         Item item = new Item(this, _itemPrice, itemIndex);
         items[itemIndex]._item = item;
         items[itemIndex]._identifier = _identifier;
@@ -58,7 +60,7 @@ contract SupplyChain {
         emit SupplyChainStep(_itemIndex, uint(State.Paid), address(items[_itemIndex]._item));
     }
 
-    function triggerDispatch(uint _itemIndex) public {
+    function triggerDispatch(uint _itemIndex) public onlyOwner {
         require(items[_itemIndex]._state == State.Paid, "Item state must in Paid");
         items[_itemIndex]._state = State.Delivered;
         emit SupplyChainStep(_itemIndex, uint(State.Delivered), address(items[_itemIndex]._item));
