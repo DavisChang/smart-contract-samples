@@ -34,6 +34,7 @@ A development framework for Ethereum. [Link](https://trufflesuite.com/boxes/reac
 $ truffle unbox react 
 
 ```
+Development:          truffle develop
 
 Compile:              truffle compile
 
