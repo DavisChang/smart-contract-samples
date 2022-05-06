@@ -31,22 +31,25 @@ $ npm install -g truffle
 A development framework for Ethereum. [Link](https://trufflesuite.com/boxes/react/)
 
 ```
-$ truffle unbox react 
+// install project
+$ truffle unbox react
 
+// Truffle Development
+$ truffle develop
+// Truffle Compile
+truffle(develop)> compile
+// Truffle Migrate
+truffle(develop)> migrate
+// Truffle Test contracts
+truffle(develop)> test
+
+// Run dev server
+$ cd client && npm run start
+// Test dapp
+$ cd client && npm test
+// Build for production
+$ cd client && npm run build
 ```
-Development:          truffle develop
-
-Compile:              truffle compile
-
-Migrate:              truffle migrate
-
-Test contracts:       truffle test
-
-Test dapp:            cd client && npm test
-
-Run dev server:       cd client && npm run start
-
-Build for production: cd client && npm run build
 
 ### Import Truffle Generated Account To Metamask
 
