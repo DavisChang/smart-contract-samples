@@ -47,3 +47,8 @@ Test dapp:            cd client && npm test
 Run dev server:       cd client && npm run start
 
 Build for production: cd client && npm run build
+
+### Import Truffle Generated Account To Metamask
+
+Copy a account private key, then open Metamask to click "Import Account"
+
