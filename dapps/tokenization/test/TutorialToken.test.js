@@ -13,10 +13,15 @@ contract("TutorialToken", accounts => {
 
   const [deployerAccount, recipient, anotherAccount] = accounts;
 
+  beforeEach( async () => {
+    const initialSupply = 1000000; 
+    this.myToken = await TutorialToken.new(initialSupply);
+  });
+
   it("all tokens should be in account", async () => {
     console.log('test-helpers:', { ZERO_ADDRESS, BN1: new BN(1) });
     
-    const instance = await TutorialToken.deployed();
+    const instance = this.myToken;
     const totalSupply = await instance.totalSupply();
     const balance = await instance.balanceOf(deployerAccount);
 
@@ -28,7 +33,7 @@ contract("TutorialToken", accounts => {
 
   it("is possible to send tokens between accounts", async () => {
     const sendToken = new BN(1);
-    const instance = await TutorialToken.deployed();
+    const instance = this.myToken;
     const totalSupply = await instance.totalSupply();
 
     const receipt = await instance.transfer(recipient, sendToken);
@@ -43,7 +48,7 @@ contract("TutorialToken", accounts => {
   })
 
   it("is not posible to send more tokens than available in total", async () => {
-    const instance = await TutorialToken.deployed();
+    const instance = this.myToken;
     const deployerBalance = await instance.balanceOf(deployerAccount);
 
     await expectRevert(
