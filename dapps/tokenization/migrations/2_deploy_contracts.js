@@ -4,6 +4,7 @@ const ComplexStorage = artifacts.require("ComplexStorage");
 
 module.exports = function(deployer) {
   deployer.deploy(SimpleStorage);
-  deployer.deploy(TutorialToken);
+  const initialSupply = 1000000;
+  deployer.deploy(TutorialToken, initialSupply);
   deployer.deploy(ComplexStorage);
 };

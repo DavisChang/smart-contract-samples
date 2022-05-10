@@ -11,6 +11,7 @@ module.exports = {
       network_id: "*"
     }
   },
+  // Compilers <https://trufflesuite.com/docs/truffle/reference/configuration/#solc>
   compilers: {
     solc: {
       version: "^0.8.0"
