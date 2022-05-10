@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../.env" });
 const {
   BN,           // Big Number support
   constants,    // Common constants, like the zero address and largest integers
@@ -12,9 +13,9 @@ const TutorialToken = artifacts.require("TutorialToken");
 contract("TutorialToken", accounts => {
 
   const [deployerAccount, recipient, anotherAccount] = accounts;
-
+  
   beforeEach( async () => {
-    const initialSupply = 1000000; 
+    const initialSupply = process.env.INITIAL_TOKEN_SUPPLY;
     this.myToken = await TutorialToken.new(initialSupply);
   });
 
