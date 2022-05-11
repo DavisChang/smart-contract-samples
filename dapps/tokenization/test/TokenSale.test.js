@@ -8,6 +8,7 @@ const {
 const { expect } = require('chai');
 const Token = artifacts.require("TutorialToken");
 const TokenSale = artifacts.require("TokenSale");
+const KYC = artifacts.require("KYC");
 
 contract("TokenSale", accounts => {
 
@@ -32,18 +33,22 @@ contract("TokenSale", accounts => {
   });
 
   it("should be able to buy some tokens", async () => {
-    const initialBalance = await this.myToken.balanceOf(deployerAccount);
+    const initialBalance = await this.myToken.balanceOf(anotherAccount);
+    const kycInstance = await KYC.deployed();
+
+    await kycInstance.setKycCompleted(anotherAccount, { from: deployerAccount });
+
     expectEvent(
       await this.myTokenSale.sendTransaction({
-        from: deployerAccount,
+        from: anotherAccount,
         value: web3.utils.toWei("10", "wei")
       }),
       'TokensPurchased',
       {
-        purchaser: deployerAccount,
+        purchaser: anotherAccount,
         value: web3.utils.toWei("10", "wei"),
       }
     );
-    expect(await this.myToken.balanceOf(deployerAccount)).to.be.bignumber.equal(initialBalance + 10);
+    expect(await this.myToken.balanceOf(anotherAccount)).to.be.bignumber.equal(initialBalance + 10);
   });
 });
