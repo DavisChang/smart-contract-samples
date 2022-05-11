@@ -20,8 +20,6 @@ contract("TutorialToken", accounts => {
   });
 
   it("all tokens should be in account", async () => {
-    console.log('test-helpers:', { ZERO_ADDRESS, BN1: new BN(1) });
-    
     const instance = this.myToken;
     const totalSupply = await instance.totalSupply();
     const balance = await instance.balanceOf(deployerAccount);
