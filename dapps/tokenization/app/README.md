@@ -6,6 +6,21 @@ If you are using create-react-app version >=5 you may run into issues building. 
 ## Usage
 
 ```
+// Start Truffle Develop
+$ truffle develop
+truffle(develop)> migrate
+
+// Start project
 $ npm install
 $ npm start
+```
+
+
+## Let your test account get ether within Metamask
+1. Copy private and import to Metamask
+2. Use the account we have in Metamask, and create transaction from truffle in order to deploy smart contract (Owner issue)
+
+```
+$ truffle develop
+truffle(develop)> web3.eth.sendTransaction({ to: "Put your Metamask account address here", from: accounts[0], value: web3.utils.toWei("2", "ether") })
 ```
