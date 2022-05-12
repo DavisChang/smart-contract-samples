@@ -37,6 +37,8 @@ contract("TokenSale", accounts => {
     const kycInstance = await KYC.deployed();
 
     await kycInstance.setKycCompleted(anotherAccount, { from: deployerAccount });
+    const kycStatus = await kycInstance.completeKyc(anotherAccount);
+    expect(kycStatus).to.be.equal(true);
 
     expectEvent(
       await this.myTokenSale.sendTransaction({

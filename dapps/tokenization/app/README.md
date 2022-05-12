@@ -10,6 +10,10 @@ If you are using create-react-app version >=5 you may run into issues building. 
 $ truffle develop
 truffle(develop)> migrate
 
+// Use hdwallet-provider to get Metamask account
+$ truffle develop
+truffle migrate --network ganache_local
+
 // Start project
 $ npm install
 $ npm start

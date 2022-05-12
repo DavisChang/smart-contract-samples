@@ -15,7 +15,7 @@ contract("TutorialToken", accounts => {
   const [deployerAccount, recipient, anotherAccount] = accounts;
   
   beforeEach( async () => {
-    const initialSupply = process.env.INITIAL_TOKEN_SUPPLY;
+    const initialSupply = process.env.INITIAL_TOKEN_SUPPLY || 'add INITIAL_TOKEN_SUPPLY into .env';;
     this.myToken = await TutorialToken.new(initialSupply);
   });
 

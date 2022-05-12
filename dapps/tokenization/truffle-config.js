@@ -1,4 +1,13 @@
 const path = require("path");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+require("dotenv").config({ path: "./.env" });
+const mnemonicPhrase = process.env.MNEMONIC || 'add MNEMONIC into .env';
+
+const provider = new HDWalletProvider({
+  mnemonic: mnemonicPhrase,
+  providerOrUrl: "http://127.0.0.1:8545",
+  addressIndex: 0
+});
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -9,7 +18,13 @@ module.exports = {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*"
-    }
+    },
+    ganache_local: { // truffle(develop)> truffle migrate --network ganache_local
+      provider: function() {
+        return provider;
+      },
+      network_id: "*"
+    },
   },
   // Compilers <https://trufflesuite.com/docs/truffle/reference/configuration/#solc>
   compilers: {

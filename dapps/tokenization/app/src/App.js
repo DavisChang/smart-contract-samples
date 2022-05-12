@@ -16,6 +16,7 @@ function App() {
       const Web3 = await getWeb3();
       const accounts = await Web3.eth.getAccounts();
       const networkId = await Web3.eth.net.getId();
+      console.log({ networkId })
       const tutorialTokenInstance = new Web3.eth.Contract(
         TutorialToken.abi,
         TutorialToken.networks[networkId] && TutorialToken.networks[networkId].address
@@ -47,7 +48,18 @@ function App() {
     const { kycInstance } = instances;
     try {
       await kycInstance.methods.setKycCompleted(kycAddress).send({ from: accounts[0] });
+      alert("KYC is success!");
     } catch (e) {
+      console.error(e);
+    }
+  }
+
+  const onSubmitCheckKyc = async () => {
+    const { kycInstance } = instances;
+    try {
+      const status = await kycInstance.methods.completeKyc(kycAddress).call();
+      alert(`${kycAddress}: \n KYC is ${status ? 'complete!!' : 'not complete!!'}`);
+    } catch(e) {
       console.error(e);
     }
   }
@@ -58,7 +70,9 @@ function App() {
       <p>Get your token today!</p>
       <h2>KYC Whitelist</h2>
       <div>
-        Address to Allow <input type="text" name="kycAddress" value={kycAddress} onChange={onChangeKyc} />
+        Enter Your Address
+        <input type="text" name="kycAddress" value={kycAddress} onChange={onChangeKyc} />
+        <button type="button" onClick={onSubmitCheckKyc} disabled={kycAddress === ''}>Check KYC</button>
         <button type="button" onClick={onSubmitKyc} disabled={kycAddress === ''}>Add to Whitelist</button>
       </div>
     </div>

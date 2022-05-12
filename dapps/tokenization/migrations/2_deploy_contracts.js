@@ -12,7 +12,7 @@ module.exports = async (deployer) => {
   await deployer.deploy(ComplexStorage);
 
   await deployer.deploy(KYC);
-  const initialSupply = process.env.INITIAL_TOKEN_SUPPLY;
+  const initialSupply = process.env.INITIAL_TOKEN_SUPPLY || 'add INITIAL_TOKEN_SUPPLY into .env';
   await deployer.deploy(TutorialToken, initialSupply);
 
   const rate = 1;
