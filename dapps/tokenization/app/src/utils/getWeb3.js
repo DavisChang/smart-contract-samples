@@ -1,6 +1,6 @@
 import Web3 from "web3";
 
-const getWeb3 = () =>
+const getWeb3 = (updateAccounts) =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
     window.addEventListener("load", async () => {
@@ -10,6 +10,18 @@ const getWeb3 = () =>
         try {
           // Request account access if needed
           await window.ethereum.enable();
+
+          // detect Metamask account change
+          window.ethereum.on('accountsChanged', function (accounts) {
+            console.log('accountsChanges', accounts);
+            updateAccounts(accounts)
+          });
+
+          // detect Network account change
+          window.ethereum.on('networkChanged', function(networkId){
+            console.log('networkChanged', networkId);
+          });
+
           // Accounts now exposed
           resolve(web3);
         } catch (error) {

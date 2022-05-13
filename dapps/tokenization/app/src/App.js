@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const init = async () => {
-      const Web3 = await getWeb3();
+      const Web3 = await getWeb3(setAccounts);
       const accounts = await Web3.eth.getAccounts();
       const networkId = await Web3.eth.net.getId();
 
@@ -49,6 +49,16 @@ function App() {
     init();
   }, [])
   
+  useEffect(() => {
+    const { tutorialTokenInstance } = instances;
+    const update = async () => {
+      await getBalanceByAddress(accounts[0], tutorialTokenInstance);
+    }
+    if (tutorialTokenInstance) {
+      update()
+    }
+  }, [accounts, instances]);
+
   const getBalanceByAddress = async (address, tutorialTokenInstance) => {
     const accountBalance = await tutorialTokenInstance.methods.balanceOf(address).call();
     setBalance(accountBalance)
@@ -88,7 +98,6 @@ function App() {
     }
   }
 
-  console.log('App:', { Web3, accounts, instances })
   return (
     <div className="App">
       <h1>TT Token Sale</h1>
