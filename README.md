@@ -31,27 +31,25 @@ $ npm install -g truffle
 A development framework for Ethereum. [Link](https://trufflesuite.com/boxes/react/)
 
 ```
-// install project
-$ truffle unbox react
+$ truffle develop             // Truffle Development
+truffle(develop)> compile     // Truffle Compile
+truffle(develop)> migrate     // Truffle Migrate
+truffle(develop)> test        // Truffle Test contracts
 
-// Truffle Development
-$ truffle develop
-// Truffle Compile
-truffle(develop)> compile
-// Truffle Migrate
-truffle(develop)> migrate
-// Truffle Test contracts
-truffle(develop)> test
-
-// Run dev server
-$ cd client && npm run start
-// Test dapp
-$ cd client && npm test
-// Build for production
-$ cd client && npm run build
+$ cd client && npm run start  // Run dev server
+$ cd client && npm test       // Test dapp
+$ cd client && npm run build  // Build for production
 ```
 
 ### Import Truffle Generated Account To Metamask
-
 Copy a account private key, then open Metamask to click "Import Account"
 
+
+### Infura
+
+Create a new project in [Infura](https://infura.io/). Deploy smart contract to Rinkeby network.
+
+```
+$ truffle develop
+truffle(develop)> truffle migrate --network rinkeby_infura // Migrate to Rinkeby network
+```

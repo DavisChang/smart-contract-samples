@@ -25,3 +25,4 @@ truffle migrate --network ganache_local
 $ npm install
 $ npm start
 ```
+

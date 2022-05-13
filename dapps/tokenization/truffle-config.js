@@ -25,6 +25,16 @@ module.exports = {
       },
       network_id: "*"
     },
+    rinkeby_infura: { // truffle(develop)> truffle migrate --network rinkeby_infura
+      provider: function() {
+        return new HDWalletProvider({
+          mnemonic: mnemonicPhrase,
+          providerOrUrl: "https://rinkeby.infura.io/v3/e4e78d6fafca40e880b03921dcc20422",
+          addressIndex: 0
+        });
+      },
+      network_id: 4
+    },
   },
   // Compilers <https://trufflesuite.com/docs/truffle/reference/configuration/#solc>
   compilers: {
